@@ -48,4 +48,11 @@ public abstract class GamePiece {
     public String getPlayer() {
         return player;
     }
+
+    public Boolean inBounds(int newX, int newY) {
+        if (newX >= 0 && newX <= 7 && newY >= 0 && newY <= 7) {
+            return true;
+        }
+        return false;
+    }
 }

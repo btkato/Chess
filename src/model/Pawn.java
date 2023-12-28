@@ -28,27 +28,30 @@ public class Pawn extends GamePiece {
     public Boolean validMove(int newX, int newY) {
         int x = this.getX();
         int y = this.getY();
-        if (isColored()) {
-            if (firstMove) {
-                if (newY >= y - 2 && newY <= y && newX == x) {
-                    return true;
+        if (inBounds(newX, newY)) {
+            if (isColored()) {
+                if (firstMove) {
+                    if (newY >= y - 2 && newY <= y && newX == x) {
+                        return true;
+                    }
+                } else {
+                    if (newY >= y - 1 && newY <= y && newX == x) {
+                        return true;
+                    }
                 }
             } else {
-                if (newY >= y - 1 && newY <= y && newX == x) {
-                    return true;
-                }
-            }
-        } else {
-            if (firstMove) {
-                if (newY <= y + 2 && newY >= y && newX == x) {
-                    return true;
-                }
-            } else {
-                if (newY <= y + 1 && newY >= y && newX == x) {
-                    return true;
+                if (firstMove) {
+                    if (newY <= y + 2 && newY >= y && newX == x) {
+                        return true;
+                    }
+                } else {
+                    if (newY <= y + 1 && newY >= y && newX == x) {
+                        return true;
+                    }
                 }
             }
         }
+
         return false;
     }
 }

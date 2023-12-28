@@ -21,6 +21,8 @@ class TestPawn {
         testBoard = new Board();
         testOne = new Pawn(3, 3, false, "test");
         testTwo = new Pawn(4, 6, true, "test2");
+        testThree = new Pawn(1, 7, false, "test");
+        testFour = new Pawn(7, 0, true, "test2");
     }
 
     @Test
@@ -83,6 +85,14 @@ class TestPawn {
     }
 
     @Test
+    void testOutOfBoundsMoveW() {
+        Boolean move = testThree.move(1, 8);
+        assertFalse(move);
+        assertEquals(testThree.getX(), 1);
+        assertEquals(testThree.getY(), 7);
+    }
+
+    @Test
     void testValidFirstMoveB() {
         Boolean move = testTwo.move(4, 4);
         assertTrue(move);
@@ -131,5 +141,13 @@ class TestPawn {
         assertFalse(move);
         assertEquals(testTwo.getX(), 4);
         assertEquals(testTwo.getY(), 6);
+    }
+
+    @Test
+    void testOutOfBoundsMoveB() {
+        Boolean move = testFour.move(7, -1);
+        assertFalse(move);
+        assertEquals(testFour.getX(), 7);
+        assertEquals(testFour.getY(), 0);
     }
 }
