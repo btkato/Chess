@@ -2,7 +2,6 @@ package test;
 
 import model.Board;
 import model.GamePiece;
-import model.Pawn;
 import model.Rook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
