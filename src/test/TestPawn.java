@@ -11,10 +11,10 @@ class TestPawn {
 
     private Board testBoard;
 
-    private Pawn testOne;
-    private Pawn testTwo;
-    private Pawn testThree;
-    private Pawn testFour;
+    private GamePiece testOne;
+    private GamePiece testTwo;
+    private GamePiece testThree;
+    private GamePiece testFour;
 
     @BeforeEach
     void runBefore() {

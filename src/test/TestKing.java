@@ -10,7 +10,7 @@ public class TestKing {
 
     private Board testBoard;
 
-    private King testOne;
+    private GamePiece testOne;
 
     @BeforeEach
     void runBefore() {

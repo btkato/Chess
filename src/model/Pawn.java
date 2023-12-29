@@ -5,23 +5,8 @@ public class Pawn extends GamePiece {
     private Boolean firstMove;
 
     public Pawn(int x, int y, Boolean color, String player) {
-        setX(x);
-        setY(y);
-        setColor(color);
-        setPlayer(player);
+        super(x, y, color, player);
         this.firstMove = true;
-    }
-    @Override
-    public Boolean move(int newX, int newY) {
-        if (validMove(newX,newY)) {
-            setX(newX);
-            setY(newY);
-            if (firstMove) {
-                this.firstMove = false;
-            }
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -32,6 +17,7 @@ public class Pawn extends GamePiece {
             if (isColored()) {
                 if (firstMove) {
                     if (newY >= y - 2 && newY <= y && newX == x) {
+                        this.firstMove = false;
                         return true;
                     }
                 } else {
@@ -42,6 +28,7 @@ public class Pawn extends GamePiece {
             } else {
                 if (firstMove) {
                     if (newY <= y + 2 && newY >= y && newX == x) {
+                        this.firstMove = false;
                         return true;
                     }
                 } else {

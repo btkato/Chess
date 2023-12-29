@@ -13,7 +13,21 @@ public abstract class GamePiece {
 
     private String player;
 
-    abstract Boolean move(int newX, int newY);
+    public GamePiece (int x, int y, Boolean color, String player) {
+        setX(x);
+        setY(y);
+        setColor(color);
+        setPlayer(player);
+    }
+
+    public Boolean move(int newX, int newY) {
+        if (validMove(newX, newY)) {
+            setX(newX);
+            setY(newY);
+            return true;
+        }
+        return false;
+    }
 
     abstract Boolean validMove(int newX, int newY);
 

@@ -3,20 +3,7 @@ package model;
 public class King extends GamePiece{
 
     public King (int x, int y, Boolean color, String player) {
-        setX(x);
-        setY(y);
-        setColor(color);
-        setPlayer(player);
-    }
-
-    @Override
-    public Boolean move(int newX, int newY) {
-        if (validMove(newX, newY)) {
-            setX(newX);
-            setY(newY);
-            return true;
-        }
-        return false;
+        super(x, y, color, player);
     }
 
     @Override
