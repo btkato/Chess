@@ -29,6 +29,12 @@ public class Board {
         board.set(g.getY(), row);
     }
 
+    public void removePiece(int oldX, int oldY) {
+        ArrayList<GamePiece> row = board.get(oldY);
+        row.set(oldX, null);
+        board.set(oldY, row);
+    }
+
     /**
      * Moves chess piece on board in valid movement pattern
      * @param oldX old x coordinate of chess piece
@@ -37,9 +43,14 @@ public class Board {
      * @param newY new y coordinate of chess piece
      * @param g game piece that will be moved
      */
-    public void movePiece(int oldX, int oldY, int newX, int newY, GamePiece g) {
+    public Boolean movePiece(int oldX, int oldY, int newX, int newY, GamePiece g) {
         GamePiece piece = getGamePiece(oldX, oldY);
-        piece.move(newX, newY);
+        if (piece.move(newX, newY)) {
+            placePiece(g);
+            removePiece(oldX, oldY);
+            return true;
+        }
+        return false;
     }
 
     public int getRows() {
