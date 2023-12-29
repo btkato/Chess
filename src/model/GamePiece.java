@@ -13,7 +13,7 @@ public abstract class GamePiece {
 
     private String player;
 
-    public GamePiece (int x, int y, Boolean color, String player) {
+    public GamePiece(int x, int y, Boolean color, String player) {
         setX(x);
         setY(y);
         setColor(color);
