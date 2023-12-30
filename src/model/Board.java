@@ -1,5 +1,7 @@
 package model;
 
+import model.pieces.GamePiece;
+
 import java.util.ArrayList;
 
 /**
@@ -63,5 +65,9 @@ public class Board {
 
     public GamePiece getGamePiece(int x, int y) {
         return board.get(y).get(x);
+    }
+
+    public ArrayList<ArrayList<GamePiece>> getBoard() {
+        return board;
     }
 }

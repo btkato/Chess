@@ -1,8 +1,8 @@
 package test;
 
 import model.Board;
-import model.GamePiece;
-import model.Queen;
+import model.pieces.GamePiece;
+import model.pieces.Queen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

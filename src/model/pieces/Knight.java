@@ -1,9 +1,13 @@
-package model;
+package model.pieces;
 
-public class Knight extends GamePiece{
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class Knight extends GamePiece {
 
     public Knight(int x, int y, Boolean color, String player) {
         super(x, y, color, player);
+        setId(3);
     }
 
     @Override
