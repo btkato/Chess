@@ -1,6 +1,6 @@
-package model;
+package gui;
 
-import model.gui.BoardGUI;
+import gui.BoardGUI;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,11 +1,13 @@
 package model.pieces;
 
+import model.Player;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Knight extends GamePiece {
 
-    public Knight(int x, int y, Boolean color, String player) {
+    public Knight(int x, int y, Boolean color, Player player) {
         super(x, y, color, player);
         setId(3);
     }

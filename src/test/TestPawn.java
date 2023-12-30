@@ -1,6 +1,7 @@
 package test;
 
 import model.Board;
+import model.Player;
 import model.pieces.GamePiece;
 import model.pieces.Pawn;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,15 +20,15 @@ class TestPawn {
     @BeforeEach
     void runBefore() {
         testBoard = new Board();
-        testOne = new Pawn(3, 3, false, "test");
-        testTwo = new Pawn(4, 6, true, "test2");
-        testThree = new Pawn(1, 7, false, "test");
-        testFour = new Pawn(7, 0, true, "test2");
+        testOne = new Pawn(3, 3, false, new Player("test", false));
+        testTwo = new Pawn(4, 6, true, new Player("test2", true));
+        testThree = new Pawn(1, 7, false, new Player("test", false));
+        testFour = new Pawn(7, 0, true, new Player("test2", true));
     }
 
     @Test
     void testConstructor() {
-        assertEquals("test", testOne.getPlayer());
+        assertEquals("test", testOne.getPlayer().getName());
         assertEquals(3, testOne.getX());
         assertEquals(3, testOne.getY());
         assertEquals(false, testOne.isColored());

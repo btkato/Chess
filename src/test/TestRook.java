@@ -1,6 +1,7 @@
 package test;
 
 import model.Board;
+import model.Player;
 import model.pieces.GamePiece;
 import model.pieces.Rook;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,10 +20,10 @@ public class TestRook {
     @BeforeEach
     void runBefore() {
         testBoard = new Board();
-        testOne = new Rook(3, 2, false, "test");
-        testTwo = new Rook(4, 6, true, "test2");
-        testThree = new Rook(1, 7, false, "test");
-        testFour = new Rook(7, 0, true, "test2");
+        testOne = new Rook(3, 2, false, new Player("test", false));
+        testTwo = new Rook(4, 6, true, new Player("test", true));
+        testThree = new Rook(1, 7, false, new Player("test", false));
+        testFour = new Rook(7, 0, true, new Player("test2", true));
     }
 
     @Test
@@ -30,7 +31,7 @@ public class TestRook {
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 2);
         assertFalse(testOne.isColored());
-        assertEquals(testOne.getPlayer(), "test");
+        assertEquals(testOne.getPlayer().getName(), "test");
     }
 
     @Test

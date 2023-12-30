@@ -1,5 +1,7 @@
 package model.pieces;
 
+import model.Player;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,7 +21,7 @@ public abstract class GamePiece {
 
     private int id;
 
-    private String player;
+    private Player player;
 
     BufferedImage sheet;
     {
@@ -41,7 +43,7 @@ public abstract class GamePiece {
     private BufferedImage iconR;
     protected Image icon;
 
-    public GamePiece(int x, int y, Boolean color, String player) {
+    public GamePiece(int x, int y, Boolean color, Player player) {
         setX(x);
         setY(y);
         setColor(color);
@@ -50,8 +52,12 @@ public abstract class GamePiece {
 
     public Boolean move(int newX, int newY) {
         if (validMove(newX, newY)) {
+            int oldX = this.xPos;
+            int oldY = this.yPos;
             setX(newX);
             setY(newY);
+            player.move(this, oldX, oldY);
+
             return true;
         }
         return false;
@@ -75,7 +81,7 @@ public abstract class GamePiece {
         this.color = color;
     }
 
-    public void setPlayer(String player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
@@ -94,7 +100,7 @@ public abstract class GamePiece {
         return color;
     }
 
-    public String getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 

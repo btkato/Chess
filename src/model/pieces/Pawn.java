@@ -1,5 +1,7 @@
 package model.pieces;
 
+import model.Player;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -7,7 +9,7 @@ public class Pawn extends GamePiece {
 
     private Boolean firstMove;
 
-    public Pawn(int x, int y, Boolean color, String player) {
+    public Pawn(int x, int y, Boolean color, Player player) {
         super(x, y, color, player);
         setId(5);
         this.firstMove = true;

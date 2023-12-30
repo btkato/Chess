@@ -20,15 +20,15 @@ public class Player {
         this.name = name;
         this.color = color;
         pieces = new ArrayList<>();
-        initializePawns(name, color);
-        initializeRooks(name, color);
-        initializeBishops(name, color);
-        initializeKnights(name, color);
-        initializeQueen(name, color);
-        initializeKing(name, color);
+        initializePawns(color);
+        initializeRooks(color);
+        initializeBishops(color);
+        initializeKnights(color);
+        initializeQueen(color);
+        initializeKing(color);
     }
 
-    public void initializePawns(String name, Boolean color) {
+    public void initializePawns(Boolean color) {
         int y;
         if (color) {
             y = 6;
@@ -36,39 +36,39 @@ public class Player {
             y = 1;
         }
         for (int i = 0; i < 8; i++) {
-            pieces.add(new Pawn(i, y, color, name));
+            pieces.add(new Pawn(i, y, color, this));
         }
     }
 
-    public void initializeRooks(String name, Boolean color) {
+    public void initializeRooks(Boolean color) {
         int y = setY();
         for (int i = 0; i < 8; i = i + 7) {
-            pieces.add(new Rook(i, y, color, name));
+            pieces.add(new Rook(i, y, color, this));
         }
     }
 
-    public void initializeBishops(String name, Boolean color) {
+    public void initializeBishops(Boolean color) {
         int y = setY();
         for (int i = 2; i < 6; i = i + 3) {
-            pieces.add(new Bishop(i, y, color, name));
+            pieces.add(new Bishop(i, y, color, this));
         }
     }
 
-    public void initializeKnights(String name, Boolean color) {
+    public void initializeKnights(Boolean color) {
         int y = setY();
         for (int i = 1; i < 7; i = i + 5) {
-            pieces.add(new Knight(i, y, color, name));
+            pieces.add(new Knight(i, y, color, this));
         }
     }
 
-    public void initializeQueen(String name, Boolean color) {
+    public void initializeQueen(Boolean color) {
         int y = setY();
-        pieces.add(new Queen(3, y, color, name));
+        pieces.add(new Queen(3, y, color, this));
     }
 
-    public void initializeKing(String name, Boolean color) {
+    public void initializeKing(Boolean color) {
         int y = setY();
-        pieces.add(new King(4, y, color, name));
+        pieces.add(new King(4, y, color, this));
     }
 
     public int setY() {
@@ -76,6 +76,16 @@ public class Player {
             return 7;
         } else {
             return 0;
+        }
+    }
+
+    public void move(GamePiece piece, int oldX, int oldY) {
+        for (int i = 0; i < pieces.size(); i++) {
+            GamePiece p = pieces.get(i);
+            if (p.getX() == oldX && p.getY() == oldY) {
+                pieces.set(i, piece);
+                return;
+            }
         }
     }
 

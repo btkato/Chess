@@ -21,13 +21,13 @@ class TestBoard{
     @BeforeEach
     void runBefore() {
         testBoard = new Board();
-        testPawn = new Pawn(2, 1, false, "test");
-        testPawnC = new Pawn(2, 6, true, "test");
-        testRook = new Rook(0, 0, true, "test");
-        testBishop = new Bishop(2, 0, true, "test");
-        testKnight = new Knight(6, 0, true, "test");
-        testKing = new King(4, 0, true, "test");
-        testQueen = new Queen(3, 0, true, "test");
+        testPawn = new Pawn(2, 1, false, new Player("test", false));
+        testPawnC = new Pawn(2, 6, true, new Player("test", true));
+        testRook = new Rook(0, 0, true, new Player("test", true));
+        testBishop = new Bishop(2, 0, true, new Player("test", true));
+        testKnight = new Knight(6, 0, true, new Player("test", true));
+        testKing = new King(4, 0, true, new Player("test", true));
+        testQueen = new Queen(3, 0, true, new Player("test", true));
     }
 
     @Test

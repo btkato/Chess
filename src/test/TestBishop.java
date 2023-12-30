@@ -1,6 +1,7 @@
 package test;
 
 import model.Board;
+import model.Player;
 import model.pieces.GamePiece;
 import model.pieces.Bishop;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +16,7 @@ public class TestBishop {
 
     @BeforeEach
     void runBefore() {
-        testOne = new Bishop(2, 3, false, "test");
+        testOne = new Bishop(2, 3, false, new Player("test", false));
     }
 
     @Test
@@ -23,7 +24,7 @@ public class TestBishop {
         assertFalse(testOne.isColored());
         assertEquals(2, testOne.getX());
         assertEquals(3, testOne.getY());
-        assertEquals("test", testOne.getPlayer());
+        assertEquals("test", testOne.getPlayer().getName());
     }
 
     @Test

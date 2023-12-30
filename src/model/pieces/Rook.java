@@ -1,11 +1,13 @@
 package model.pieces;
 
+import model.Player;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Rook extends GamePiece {
 
-    public Rook (int x, int y, Boolean color, String player) {
+    public Rook (int x, int y, Boolean color, Player player) {
         super(x, y, color, player);
         setId(4);
     }

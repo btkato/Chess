@@ -11,6 +11,8 @@ public class Chess {
 
     private Player playerTwo;
 
+    private Boolean gameOver;
+
     private Board board;
     public Chess() {
         playerOne = new Player("PlayerOne", false);
@@ -18,6 +20,7 @@ public class Chess {
         board = new Board();
         initializeBoard(playerOne);
         initializeBoard(playerTwo);
+        gameOver = false;
     }
 
     public void initializeBoard(Player player) {
@@ -28,7 +31,27 @@ public class Chess {
         }
     }
 
+    public Boolean playerMove(Player player, GamePiece piece, int newX, int newY) {
+        if (piece.getPlayer() == player) {
+            if (board.movePiece(piece.getX(), piece.getY(), newX, newY, piece)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public ArrayList<ArrayList<GamePiece>> getBoard() {
         return board.getBoard();
+    }
+
+    public Boolean isGameOver() {
+        return gameOver;
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
     }
 }

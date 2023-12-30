@@ -1,5 +1,7 @@
 package model.pieces;
 
+import model.Player;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -7,7 +9,7 @@ import static java.lang.Math.abs;
 
 public class Queen extends GamePiece {
 
-    public Queen(int x, int y, Boolean color, String player) {
+    public Queen(int x, int y, Boolean color, Player player) {
         super(x, y, color, player);
         setId(1);
     }
