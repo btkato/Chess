@@ -50,20 +50,13 @@ public abstract class GamePiece {
         setPlayer(player);
     }
 
-    public Boolean move(int newX, int newY) {
-        if (validMove(newX, newY)) {
-            int oldX = this.xPos;
-            int oldY = this.yPos;
-            setX(newX);
-            setY(newY);
-            player.move(this, oldX, oldY);
-
-            return true;
-        }
-        return false;
+    public void move(int newX, int newY) {
+        setX(newX);
+        setY(newY);
     }
 
-    abstract Boolean validMove(int newX, int newY);
+    public abstract Boolean validMove(int newX, int newY);
+
 
     public void setId(int id) {
         this.id = id;

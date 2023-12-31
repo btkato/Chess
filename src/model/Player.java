@@ -20,6 +20,10 @@ public class Player {
         this.name = name;
         this.color = color;
         pieces = new ArrayList<>();
+
+    }
+
+    public void initializePieces(Boolean color) {
         initializePawns(color);
         initializeRooks(color);
         initializeBishops(color);
@@ -76,16 +80,6 @@ public class Player {
             return 7;
         } else {
             return 0;
-        }
-    }
-
-    public void move(GamePiece piece, int oldX, int oldY) {
-        for (int i = 0; i < pieces.size(); i++) {
-            GamePiece p = pieces.get(i);
-            if (p.getX() == oldX && p.getY() == oldY) {
-                pieces.set(i, piece);
-                return;
-            }
         }
     }
 

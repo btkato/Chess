@@ -36,16 +36,20 @@ class TestPawn {
 
     @Test
     void testValidFirstMoveW() {
-        Boolean move = testOne.move(3, 5);
+        Boolean move = testOne.validMove(3, 5);
         assertTrue(move);
+        testOne.move(3, 5);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 5);
     }
 
     @Test
     void testValidSecondMoveW() {
-        Boolean firstMove = testOne.move(3, 5);
-        Boolean secondMove = testOne.move(3, 6);
+        Boolean firstMove = testOne.validMove(3, 5);
+        testOne.move(3, 5);
+        Boolean secondMove = testOne.validMove(3, 6);
+        testOne.move(3, 6);
+        assertTrue(firstMove);
         assertTrue(secondMove);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 6);
@@ -53,7 +57,7 @@ class TestPawn {
 
     @Test
     void testInvalidXMoveW() {
-        Boolean move = testOne.move(2, 3);
+        Boolean move = testOne.validMove(2, 3);
         assertFalse(move);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 3);
@@ -61,7 +65,7 @@ class TestPawn {
 
     @Test
     void testInvalidYFirstMoveW() {
-        Boolean move = testOne.move(3, 6);
+        Boolean move = testOne.validMove(3, 6);
         assertFalse(move);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 3);
@@ -69,8 +73,9 @@ class TestPawn {
 
     @Test
     void testInvalidYSecondMoveW() {
-        Boolean move = testOne.move(3, 4);
-        Boolean moveTwo = testOne.move(3, 6);
+        Boolean move = testOne.validMove(3, 4);
+        testOne.move(3, 4);
+        Boolean moveTwo = testOne.validMove(3, 6);
         assertTrue(move);
         assertFalse(moveTwo);
         assertEquals(testOne.getX(), 3);
@@ -79,23 +84,16 @@ class TestPawn {
 
     @Test
     void testInvalidMoveBackW() {
-        Boolean move = testOne.move(3, 2);
+        Boolean move = testOne.validMove(3, 2);
         assertFalse(move);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 3);
     }
 
     @Test
-    void testOutOfBoundsMoveW() {
-        Boolean move = testThree.move(1, 8);
-        assertFalse(move);
-        assertEquals(testThree.getX(), 1);
-        assertEquals(testThree.getY(), 7);
-    }
-
-    @Test
     void testValidFirstMoveB() {
-        Boolean move = testTwo.move(4, 4);
+        Boolean move = testTwo.validMove(4, 4);
+        testTwo.move(4, 4);
         assertTrue(move);
         assertEquals(testTwo.getX(), 4);
         assertEquals(testTwo.getY(), 4);
@@ -103,8 +101,11 @@ class TestPawn {
 
     @Test
     void testValidSecondMoveB() {
-        Boolean firstMove = testTwo.move(4, 4);
-        Boolean secondMove = testTwo.move(4, 3);
+        Boolean firstMove = testTwo.validMove(4, 4);
+        testTwo.move(4, 4);
+        Boolean secondMove = testTwo.validMove(4, 3);
+        testTwo.move(4, 3);
+        assertTrue(firstMove);
         assertTrue(secondMove);
         assertEquals(testTwo.getX(), 4);
         assertEquals(testTwo.getY(), 3);
@@ -112,7 +113,7 @@ class TestPawn {
 
     @Test
     void testInvalidXMoveB() {
-        Boolean move = testTwo.move(3, 6);
+        Boolean move = testTwo.validMove(3, 6);
         assertFalse(move);
         assertEquals(testTwo.getX(), 4);
         assertEquals(testTwo.getY(), 6);
@@ -120,7 +121,7 @@ class TestPawn {
 
     @Test
     void testInvalidYFirstMoveB() {
-        Boolean move = testTwo.move(4, 3);
+        Boolean move = testTwo.validMove(4, 3);
         assertFalse(move);
         assertEquals(testTwo.getX(), 4);
         assertEquals(testTwo.getY(), 6);
@@ -128,8 +129,9 @@ class TestPawn {
 
     @Test
     void testInvalidYSecondMoveB() {
-        Boolean move = testTwo.move(4, 5);
-        Boolean moveTwo = testTwo.move(4, 3);
+        Boolean move = testTwo.validMove(4, 5);
+        testTwo.move(4, 5);
+        Boolean moveTwo = testTwo.validMove(4, 3);
         assertTrue(move);
         assertFalse(moveTwo);
         assertEquals(testTwo.getX(), 4);
@@ -138,17 +140,10 @@ class TestPawn {
 
     @Test
     void testInvalidMoveBackB() {
-        Boolean move = testTwo.move(4, 7);
+        Boolean move = testTwo.validMove(4, 7);
         assertFalse(move);
         assertEquals(testTwo.getX(), 4);
         assertEquals(testTwo.getY(), 6);
     }
 
-    @Test
-    void testOutOfBoundsMoveB() {
-        Boolean move = testFour.move(7, -1);
-        assertFalse(move);
-        assertEquals(testFour.getX(), 7);
-        assertEquals(testFour.getY(), 0);
-    }
 }

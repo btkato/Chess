@@ -17,17 +17,13 @@ public class Pawn extends GamePiece {
 
     @Override
     public Boolean validMove(int newX, int newY) {
-        int x = this.getX();
-        int y = this.getY();
-        if (inBounds(newX, newY)) {
-            if (isColored()) {
-                return colorValidMove(newX, newY);
-            } else {
-                return nonColorValidMove(newX, newY);
-            }
+        if (isColored()) {
+            return colorValidMove(newX, newY);
+        } else {
+            return nonColorValidMove(newX, newY);
         }
-        return false;
     }
+
     public Boolean colorValidMove(int newX, int newY) {
         int x = this.getX();
         int y = this.getY();

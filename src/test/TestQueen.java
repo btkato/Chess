@@ -29,28 +29,36 @@ public class TestQueen {
 
     @Test
     void testValidMoves() {
-        Boolean move = testOne.move(3, 3);
+        Boolean move = testOne.validMove(3, 3);
+        testOne.move(3, 3);
         assertTrue(move);
 
-        move = testOne.move(3, 4);
+        move = testOne.validMove(3, 4);
+        testOne.move(3, 4);
         assertTrue(move);
 
-        move = testOne.move(2, 4);
+        move = testOne.validMove(2, 4);
+        testOne.move(2, 4);
         assertTrue(move);
 
-        move = testOne.move(2, 2);
+        move = testOne.validMove(2, 2);
+        testOne.move(2, 2);
         assertTrue(move);
 
-        move = testOne.move(4, 4);
+        move = testOne.validMove(4, 4);
+        testOne.move(4, 4);
         assertTrue(move);
 
-        move = testOne.move(2, 6);
+        move = testOne.validMove(2, 6);
+        testOne.move(2, 6);
         assertTrue(move);
 
-        move = testOne.move(5, 3);
+        move = testOne.validMove(5, 3);
+        testOne.move(5, 3);
         assertTrue(move);
 
-        move = testOne.move(3, 1);
+        move = testOne.validMove(3, 1);
+        testOne.move(3, 1);
         assertEquals(3, testOne.getX());
         assertEquals(1, testOne.getY());
         assertTrue(move);
@@ -58,13 +66,13 @@ public class TestQueen {
 
     @Test
     void testInvalidMoves() {
-        Boolean move = testOne.move(4, 0);
+        Boolean move = testOne.validMove(4, 0);
         assertFalse(move);
 
-        move = testOne.move(4, 2);
+        move = testOne.validMove(4, 2);
         assertFalse(move);
 
-        move = testOne.move(4, 4);
+        move = testOne.validMove(4, 4);
         assertFalse(move);
 
         assertEquals(2, testOne.getX());

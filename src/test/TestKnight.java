@@ -28,28 +28,36 @@ public class TestKnight {
 
     @Test
     void testValidMoves() {
-        Boolean moveRD = testOne.move(5, 3);
+        Boolean moveRD = testOne.validMove(5, 3);
+        testOne.move(5, 3);
         assertTrue(moveRD);
 
-        Boolean moveRU = testOne.move(7, 4);
+        Boolean moveRU = testOne.validMove(7, 4);
+        testOne.move(7, 4);
         assertTrue(moveRU);
 
-        Boolean moveLD = testOne.move(5, 3);
+        Boolean moveLD = testOne.validMove(5, 3);
+        testOne.move(5, 3);
         assertTrue(moveLD);
 
-        Boolean moveLU = testOne.move(3, 4);
+        Boolean moveLU = testOne.validMove(3, 4);
+        testOne.move(3, 4);
         assertTrue(moveLU);
 
-        Boolean moveDL = testOne.move(2, 2);
+        Boolean moveDL = testOne.validMove(2, 2);
+        testOne.move(2, 2);
         assertTrue(moveDL);
 
-        Boolean moveDR = testOne.move(3, 0);
+        Boolean moveDR = testOne.validMove(3, 0);
+        testOne.move(3, 0);
         assertTrue(moveDR);
 
-        Boolean moveUL = testOne.move(2, 2);
+        Boolean moveUL = testOne.validMove(2, 2);
+        testOne.move(2, 2);
         assertTrue(moveUL);
 
-        Boolean moveUR = testOne.move(3, 4);
+        Boolean moveUR = testOne.validMove(3, 4);
+        testOne.move(3, 4);
         assertTrue(moveUR);
         assertEquals(3, testOne.getX());
         assertEquals(4, testOne.getY());
@@ -57,19 +65,19 @@ public class TestKnight {
 
     @Test
     void testInvalidMoves() {
-        Boolean move = testOne.move(6, 4);
+        Boolean move = testOne.validMove(6, 4);
         assertFalse(move);
 
-        Boolean moveTwo = testOne.move(1, 4);
+        Boolean moveTwo = testOne.validMove(1, 4);
         assertFalse(moveTwo);
 
-        Boolean moveThree = testOne.move(3, 6);
+        Boolean moveThree = testOne.validMove(3, 6);
         assertFalse(moveThree);
 
-        Boolean moveFour = testOne.move(3, 2);
+        Boolean moveFour = testOne.validMove(3, 2);
         assertFalse(moveFour);
 
-        Boolean moveFive = testOne.move(7, 7);
+        Boolean moveFive = testOne.validMove(7, 7);
         assertFalse(moveFive);
 
         assertEquals(3, testOne.getX());

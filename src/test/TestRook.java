@@ -36,22 +36,26 @@ public class TestRook {
 
     @Test
     void testValidMovesHorizontalAndVertical() {
-        Boolean move = testOne.move(3, 6);
+        Boolean move = testOne.validMove(3, 6);
+        testOne.move(3, 6);
         assertTrue(move);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 6);
 
-        Boolean moveTwo = testOne.move(3, 2);
+        Boolean moveTwo = testOne.validMove(3, 2);
+        testOne.move(3, 2);
         assertTrue(moveTwo);
         assertEquals(testOne.getX(), 3);
         assertEquals(testOne.getY(), 2);
 
-        Boolean moveThree = testOne.move(4, 2);
+        Boolean moveThree = testOne.validMove(4, 2);
+        testOne.move(4, 2);
         assertTrue(moveThree);
         assertEquals(testOne.getX(), 4);
         assertEquals(testOne.getY(), 2);
 
-        Boolean moveFour = testOne.move(1, 2);
+        Boolean moveFour = testOne.validMove(1, 2);
+        testOne.move(1, 2);
         assertTrue(moveFour);
         assertEquals(testOne.getX(), 1);
         assertEquals(testOne.getY(), 2);
@@ -59,22 +63,16 @@ public class TestRook {
 
     @Test
     void testInvalidMoves() {
-        Boolean move = testOne.move(4, 3);
+        Boolean move = testOne.validMove(4, 3);
         assertFalse(move);
-        assertEquals(3, testOne.getX());
-        assertEquals(2, testOne.getY());
 
-        Boolean moveTwo = testOne.move(2, 3);
+        Boolean moveTwo = testOne.validMove(2, 3);
         assertFalse(moveTwo);
-        assertEquals(3, testOne.getX());
-        assertEquals(2, testOne.getY());
 
-        Boolean moveThree = testOne.move(4, 1);
+        Boolean moveThree = testOne.validMove(4, 1);
         assertFalse(moveThree);
-        assertEquals(3, testOne.getX());
-        assertEquals(2, testOne.getY());
 
-        Boolean moveFour = testOne.move(2, 1);
+        Boolean moveFour = testOne.validMove(2, 1);
         assertFalse(moveFour);
         assertEquals(3, testOne.getX());
         assertEquals(2, testOne.getY());

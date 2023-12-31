@@ -24,6 +24,7 @@ public class Chess {
     }
 
     public void initializeBoard(Player player) {
+        player.initializePieces(player.isColored());
         Iterator<GamePiece> itOne = player.getPieces().iterator();
         while (itOne.hasNext()) {
             GamePiece p = itOne.next();
@@ -31,12 +32,18 @@ public class Chess {
         }
     }
 
-    public Boolean playerMove(Player player, GamePiece piece, int newX, int newY) {
-        if (piece.getPlayer() == player) {
-            if (board.movePiece(piece.getX(), piece.getY(), newX, newY, piece)) {
-                return true;
+    public void move(String player, GamePiece piece, int newX, int newY) {
+        board.movePiece(piece.getX(), piece.getY(), newX, newY, piece);
+    }
+
+    public Boolean validMove(String player, GamePiece piece, int newX, int newY) {
+        //if (piece.getPlayer().getName().equals(player)) {
+            if (piece.validMove(newX, newY)) {
+               if (board.noObstructions(piece, newX, newY)) {
+                   return true;
+               }
             }
-        }
+        //}
         return false;
     }
     public ArrayList<ArrayList<GamePiece>> getBoard() {
