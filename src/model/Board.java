@@ -1,6 +1,7 @@
 package model;
 
 import model.pieces.GamePiece;
+import model.pieces.Pawn;
 
 import java.util.ArrayList;
 
@@ -49,13 +50,45 @@ public class Board {
      * @param g game piece that will be moved
      */
     public void movePiece(int oldX, int oldY, int newX, int newY, GamePiece g) {
-        g.move(newX, newY);
-        placePiece(g);
-        removePiece(oldX, oldY);
+        GamePiece p = getGamePiece(newX, newY);
+        Boolean sameX = newX == oldX;
+        Boolean sameY = newY == oldY;
+        Boolean sameCoord = sameX && sameY;
+        if (!sameCoord) {
+            if (g.validMove(newX, newY)) {
+                if (noObstructions(g, newX, newY, 0)) {
+                    if (p == null) {
+                        g.move(newX, newY);
+                        placePiece(g);
+                        removePiece(oldX, oldY);
+                    }
+                }
+            }
+        }
     }
 
-    public Boolean noObstructions(GamePiece piece, int newX, int newY) {
-        boolean result = false;
+    public void attackPiece(int oldX, int oldY, int newX, int newY, GamePiece g) {
+        GamePiece attack = getGamePiece(newX, newY);
+        Boolean sameX = newX == oldX;
+        Boolean sameY = newY == oldY;
+        Boolean sameCoord = sameX && sameY;
+        if (!sameCoord) {
+            if (attack != null) {
+                if (!g.getPlayer().getName().equals(attack.getPlayer().getName())) {
+                    if (g.validAttack(newX, newY)) {
+                        if (noObstructions(g, newX, newY, 1)) {
+                            g.move(newX, newY);
+                            placePiece(g);
+                            removePiece(oldX, oldY);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public Boolean noObstructions(GamePiece piece, int newX, int newY, int type) {
+        int result = 0;
         switch (piece.getId()) {
             case 0:
                 result = kingandQueenObstructions(piece, newX, newY);
@@ -67,107 +100,119 @@ public class Board {
                 result = bishopObstructions(piece, newX, newY);
                 break;
             case 3:
-                result = knightObstructions(piece, newX, newY);
+                result = knightObstructions(piece, newX, newY, type);
                 break;
             case 4:
                 result = rookObstructions(piece, newX, newY);
                 break;
             case 5:
-                result = pawnObstructions(piece, newX, newY);
+                result = pawnObstructions(piece, newX, newY, type);
                 break;
         }
-        return result;
+        if (type == 0) {
+            return result <= 0;
+        } else {
+            return result == 1;
+        }
     }
 
-    public Boolean downObstruction (GamePiece piece, int newX, int newY) {
+    public int downObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int y = piece.getY() + 1; y <= newY; y++) {
             if (board.get(y).get(piece.getX()) != null) {
-                return false;
+                i++;
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean upObstruction (GamePiece piece, int newX, int newY) {
+    public int upObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int y = piece.getY() - 1; y >= newY; y--) {
             if (board.get(y).get(piece.getX()) != null) {
-                return false;
+                i++;
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean rightObstruction (GamePiece piece, int newX, int newY) {
+    public int rightObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int x = piece.getX() + 1; x <= newX; x++) {
             if (board.get(piece.getY()).get(x) != null) {
-                return false;
+                i++;
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean leftObstruction (GamePiece piece, int newX, int newY) {
+    public int leftObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int x = piece.getX() - 1; x >= newX; x--) {
             if (board.get(piece.getY()).get(x) != null) {
-                return false;
+                i++;
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean downRightObstruction (GamePiece piece, int newX, int newY) {
+    public int downRightObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int y = piece.getY() + 1; y <= newY; y++) {
             for (int x = piece.getX() + 1; x <= newX; x++) {
                 if (abs(newX - x) == abs(newY - y)) {
                     if (board.get(y).get(x) != null) {
-                        return false;
+                        i++;
                     }
                 }
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean downLeftObstruction (GamePiece piece, int newX, int newY) {
+    public int downLeftObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int y = piece.getY() + 1; y <= newY; y++) {
             for (int x = piece.getX() - 1; x >= newX; x--) {
                 if (abs(newX - x) == abs(newY - y)) {
                     if (board.get(y).get(x) != null) {
-                        return false;
+                        i++;
                     }
                 }
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean upLeftObstruction (GamePiece piece, int newX, int newY) {
+    public int upLeftObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int y = piece.getY() - 1; y >= newY; y--) {
             for (int x = piece.getX() - 1; x >= newX; x--) {
                 if (abs(newX - x) == abs(newY - y)) {
                     if (board.get(y).get(x) != null) {
-                        return false;
+                        i++;
                     }
                 }
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean upRightObstruction (GamePiece piece, int newX, int newY) {
+    public int upRightObstruction (GamePiece piece, int newX, int newY) {
+        int i = 0;
         for (int y = piece.getY() - 1; y >= newY; y--) {
             for (int x = piece.getX() + 1; x <= newX; x++) {
                 if (abs(newX - x) == abs(newY - y)) {
                     if (board.get(y).get(x) != null) {
-                        return false;
+                        i++;
                     }
                 }
             }
         }
-        return true;
+        return i;
     }
 
-    public Boolean kingandQueenObstructions(GamePiece piece, int newX, int newY) {
+    public int kingandQueenObstructions(GamePiece piece, int newX, int newY) {
         int dX = newX - piece.getX();
         int dY = newY - piece.getY();
         if (dX == 0 && dY > 0) {
@@ -189,7 +234,7 @@ public class Board {
         }
     }
 
-    public Boolean bishopObstructions(GamePiece piece, int newX, int newY) {
+    public int bishopObstructions(GamePiece piece, int newX, int newY) {
         int dX = newX - piece.getX();
         int dY = newY - piece.getY();
         if (dX > 0 && dY > 0) {
@@ -203,32 +248,43 @@ public class Board {
         }
     }
 
-    public Boolean knightObstructions(GamePiece piece, int newX, int newY) {
+    public int knightObstructions(GamePiece piece, int newX, int newY, int type) {
         int dX = newX - piece.getX();
         int dY = newY - piece.getY();
+        int i = 0;
         if (abs(dX) > abs(dY)) {
-            return largerX(piece, dX, dY);
+            i = largerX(piece, dX, dY);
         } else {
-            return largerY(piece, dX, dY);
+            i = largerY(piece, dX, dY);
+        }
+        if (type == 0) {
+            return i - 2;
+        }
+        else {
+            if (i == 2 || i == 3) {
+                return 1;
+            } else {
+                return i;
+            }
         }
     }
 
-    public Boolean largerX(GamePiece piece, int dX, int dY) {
+    public int largerX(GamePiece piece, int dX, int dY) {
         int count;
         int countOne = 0;
         int countTwo = 0;
         int xDir = dX < 0? -1 : 1;
         int yDir = dY < 0? -1 : 1;
-        for (int y = 0; y <= dY; y++) {
-            for (int x = 0; x <= dX; x++) {
+        for (int y = 0; y <= abs(dY); y++) {
+            for (int x = 0; x <= abs(dX); x++) {
                 if (y == 0 || (y == dY && x == dX)) {
-                    GamePiece p = board.get((y + abs(piece.getY())) * yDir).get((x + abs(piece.getX())) * xDir);
+                    GamePiece p = board.get(y * yDir + piece.getY()).get(x * xDir + piece.getX());
                     if (p != null) {
                         countOne++;
                     }
                 }
-                if (y == 1 || (y == piece.getY() && x == piece.getX())) {
-                    GamePiece p = board.get((y + abs(piece.getY())) * yDir).get((x + abs(piece.getX())) * xDir);
+                if (y == 1 || (y == dY && x == dX) || (x == 0 && y == 0)) {
+                    GamePiece p = board.get(y * yDir + piece.getY()).get(x * xDir + piece.getX());
                     if (p != null) {
                         countTwo++;
                     }
@@ -236,25 +292,27 @@ public class Board {
             }
         }
         count = min(countOne, countTwo);
-        return count <= 2;
+        return count;
     }
 
-    public Boolean largerY(GamePiece piece, int dX, int dY) {
+    public int largerY(GamePiece piece, int dX, int dY) {
         int count;
         int countOne = 0;
         int countTwo = 0;
         int xDir = dX < 0? -1 : 1;
         int yDir = dY < 0? -1 : 1;
-        for (int y = 0; y <= dY; y++) {
-            for (int x = 0; x <= dX; x++) {
-                if (x == 0 || (y == dY && x == dX)) {
-                    GamePiece p = board.get((y + abs(piece.getY())) * yDir).get((x + abs(piece.getX())) * xDir);
+        for (int y = 0; y <= abs(dY); y++) {
+            for (int x = 0; x <= abs(dX); x++) {
+                Boolean end = x == abs(dX) && y == abs(dY);
+                Boolean start = x == 0 && y == 0;
+                if (x == 0 || end) {
+                    GamePiece p = board.get(y * yDir + piece.getY()).get(x * xDir + piece.getX());
                     if (p != null) {
                         countOne++;
                     }
                 }
-                if (x == 1 || (y == piece.getY() && x == piece.getX())) {
-                    GamePiece p = board.get((y + abs(piece.getY())) * yDir).get((x + abs(piece.getX())) * xDir);
+                if (x == 1 || end || start) {
+                    GamePiece p = board.get(y * yDir + piece.getY()).get(x * xDir + piece.getX());
                     if (p != null) {
                         countTwo++;
                     }
@@ -262,10 +320,10 @@ public class Board {
             }
         }
         count = min(countOne, countTwo);
-        return count <= 2;
+        return count;
     }
 
-    public Boolean rookObstructions(GamePiece piece, int newX, int newY) {
+    public int rookObstructions(GamePiece piece, int newX, int newY) {
         int dX = newX - piece.getX();
         int dY = newY - piece.getY();
         if (dX == 0 && dY < 0) {
@@ -279,13 +337,25 @@ public class Board {
         }
     }
 
-    public Boolean pawnObstructions(GamePiece piece, int newX, int newY) {
+    public int pawnObstructions(GamePiece piece, int newX, int newY, int type) {
         int dX = newX - piece.getX();
         int dY = newY - piece.getY();
-        if (dX == 0 && dY < 0) {
-            return upObstruction(piece, newX, newY);
+        if (type == 0) {
+            if (dX == 0 && dY < 0) {
+                return upObstruction(piece, newX, newY);
+            } else {
+                return downObstruction(piece, newX, newY);
+            }
         } else {
-            return downObstruction(piece, newX, newY);
+            if (dX > 0 && dY > 0) {
+                return downRightObstruction(piece, newX, newY);
+            } else if (dX > 0 && dY < 0) {
+                return upRightObstruction(piece, newX, newY);
+            } else if (dX < 0 && dY < 0) {
+                return upLeftObstruction(piece, newX, newY);
+            } else {
+                return downLeftObstruction(piece, newX, newY);
+            }
         }
     }
 

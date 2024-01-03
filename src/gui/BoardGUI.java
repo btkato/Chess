@@ -107,10 +107,10 @@ public class BoardGUI {
                 System.out.println(e.getX() / 64 + " ");
                 System.out.println(e.getY() / 64);
                 if (selectedPiece != null) {
-                    if (game.validMove(turn, selectedPiece, e.getX() / 64, e.getY() / 64)) {
-                        game.move(turn, selectedPiece, e.getX()/64, e.getY()/64);
+                    if (game.move(turn, selectedPiece, e.getX()/64, e.getY()/64)) {
                         boardPanel.repaint();
-
+                    } else if (game.attack(turn, selectedPiece, e.getX()/64, e.getY()/64)) {
+                        boardPanel.repaint();
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Invalid Move",

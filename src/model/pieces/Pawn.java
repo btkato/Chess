@@ -55,4 +55,34 @@ public class Pawn extends GamePiece {
         }
         return false;
     }
+
+    @Override
+    public Boolean validAttack(int newX, int newY) {
+        if (isColored()) {
+            return colorValidAttack(newX, newY);
+        } else {
+            return nonColorValidAttack(newX, newY);
+        }
+    }
+
+    public Boolean colorValidAttack(int newX, int newY) {
+        if (newY == this.getY() - 1 && (newX == this.getX() - 1 || newX == this.getX() + 1)) {
+            if (firstMove) {
+                firstMove = false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean nonColorValidAttack(int newX, int newY) {
+        if (newY == this.getY() + 1 && (newX == this.getX() - 1 || newX == this.getX() + 1)) {
+            if (firstMove) {
+                firstMove = false;
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

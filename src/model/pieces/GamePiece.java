@@ -57,6 +57,13 @@ public abstract class GamePiece {
 
     public abstract Boolean validMove(int newX, int newY);
 
+    public void attack(int newX, int newY) {
+        move(newX, newY);
+    }
+
+    public Boolean validAttack(int newX, int newY) {
+        return validMove(newX, newY);
+    }
 
     public void setId(int id) {
         this.id = id;

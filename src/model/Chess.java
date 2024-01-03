@@ -32,20 +32,24 @@ public class Chess {
         }
     }
 
-    public void move(String player, GamePiece piece, int newX, int newY) {
+    public Boolean move(String player, GamePiece piece, int newX, int newY) {
         board.movePiece(piece.getX(), piece.getY(), newX, newY, piece);
+        if (piece.getY() == newY && piece.getX() == newX) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public Boolean validMove(String player, GamePiece piece, int newX, int newY) {
-        //if (piece.getPlayer().getName().equals(player)) {
-            if (piece.validMove(newX, newY)) {
-               if (board.noObstructions(piece, newX, newY)) {
-                   return true;
-               }
-            }
-        //}
-        return false;
+    public Boolean attack(String player, GamePiece piece, int newX, int newY) {
+        board.attackPiece(piece.getX(), piece.getY(), newX, newY, piece);
+        if (piece.getY() == newY && piece.getX() == newX) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
     public ArrayList<ArrayList<GamePiece>> getBoard() {
         return board.getBoard();
     }
