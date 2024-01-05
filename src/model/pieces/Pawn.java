@@ -5,6 +5,9 @@ import model.Player;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Pawn game piece
+ */
 public class Pawn extends GamePiece {
 
     private Boolean firstMove;
@@ -15,6 +18,12 @@ public class Pawn extends GamePiece {
         this.firstMove = true;
     }
 
+    /**
+     * Checks if movement pattern is valid for Pawn
+     * @param newX X coordinate of movement
+     * @param newY Y coordinate of movement
+     * @return True if movement pattern is valid, False otherwise
+     */
     @Override
     public Boolean validMove(int newX, int newY) {
         if (isColored()) {
@@ -24,6 +33,12 @@ public class Pawn extends GamePiece {
         }
     }
 
+    /**
+     * Checks if movement pattern is valid for colored Pawn
+     * @param newX X coordinate of movement
+     * @param newY Y coordinate of movement
+     * @return True if movement pattern is valid, False otherwise
+     */
     public Boolean colorValidMove(int newX, int newY) {
         int x = this.getX();
         int y = this.getY();
@@ -40,6 +55,12 @@ public class Pawn extends GamePiece {
         return false;
     }
 
+    /**
+     * Checks if movement pattern is valid for non-colored Pawn
+     * @param newX X coordinate of movement
+     * @param newY Y coordinate of movement
+     * @return True if movement pattern is valid, False otherwise
+     */
     public Boolean nonColorValidMove(int newX, int newY) {
         int x = this.getX();
         int y = this.getY();
@@ -56,6 +77,12 @@ public class Pawn extends GamePiece {
         return false;
     }
 
+    /**
+     * Checks if attack pattern is valid for Pawn
+     * @param newX X coordinate of attack
+     * @param newY X coordinate of attack
+     * @return True if attack pattern is valid, False otherwise
+     */
     @Override
     public Boolean validAttack(int newX, int newY) {
         if (isColored()) {
@@ -65,6 +92,12 @@ public class Pawn extends GamePiece {
         }
     }
 
+    /**
+     * Checks if attack pattern is valid for colored Pawn
+     * @param newX X coordinate of attack
+     * @param newY X coordinate of attack
+     * @return True if attack pattern is valid, False otherwise
+     */
     public Boolean colorValidAttack(int newX, int newY) {
         if (newY == this.getY() - 1 && (newX == this.getX() - 1 || newX == this.getX() + 1)) {
             if (firstMove) {
@@ -75,6 +108,12 @@ public class Pawn extends GamePiece {
         return false;
     }
 
+    /**
+     * Checks if attack pattern is valid for non-colored Pawn
+     * @param newX X coordinate of attack
+     * @param newY X coordinate of attack
+     * @return True if attack pattern is valid, False otherwise
+     */
     public Boolean nonColorValidAttack(int newX, int newY) {
         if (newY == this.getY() + 1 && (newX == this.getX() - 1 || newX == this.getX() + 1)) {
             if (firstMove) {

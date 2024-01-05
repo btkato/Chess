@@ -5,6 +5,9 @@ import model.Player;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Knight game piece
+ */
 public class Knight extends GamePiece {
 
     public Knight(int x, int y, Boolean color, Player player) {
@@ -12,6 +15,12 @@ public class Knight extends GamePiece {
         setId(3);
     }
 
+    /**
+     * Checks if movement pattern is valid for Knight
+     * @param newX X coordinate of movement
+     * @param newY Y coordinate of movement
+     * @return True if movement pattern is valid, False otherwise
+     */
     @Override
     public Boolean validMove(int newX, int newY) {
         Boolean downRight = newY + 2 == getY() && newX + 1 == getX();

@@ -107,9 +107,9 @@ public class BoardGUI {
                 System.out.println(e.getX() / 64 + " ");
                 System.out.println(e.getY() / 64);
                 if (selectedPiece != null) {
-                    if (game.move(turn, selectedPiece, e.getX()/64, e.getY()/64)) {
+                    if (game.move(selectedPiece, e.getX()/64, e.getY()/64)) {
                         boardPanel.repaint();
-                    } else if (game.attack(turn, selectedPiece, e.getX()/64, e.getY()/64)) {
+                    } else if (game.attack(selectedPiece, e.getX()/64, e.getY()/64)) {
                         boardPanel.repaint();
                     }
                     else {

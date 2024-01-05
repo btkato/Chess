@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 
 import static java.lang.Math.abs;
 
+/**
+ * Queen game piece
+ */
 public class Queen extends GamePiece {
 
     public Queen(int x, int y, Boolean color, Player player) {
@@ -14,6 +17,12 @@ public class Queen extends GamePiece {
         setId(1);
     }
 
+    /**
+     * Checks if movement pattern is valid for Queen
+     * @param newX X coordinate of movement
+     * @param newY Y coordinate of movement
+     * @return True if movement pattern is valid, False otherwise
+     */
     @Override
     public Boolean validMove(int newX, int newY) {
         Boolean horizontal = newY == getY() && newX >= 0 && newX <= 7;

@@ -10,6 +10,9 @@ import model.pieces.King;
 
 import java.util.ArrayList;
 
+/**
+ * Player class in Chess
+ */
 public class Player {
 
     private String name;
@@ -23,6 +26,10 @@ public class Player {
 
     }
 
+    /**
+     * Creates all pieces at correct starting positions for a specified player
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializePieces(Boolean color) {
         initializePawns(color);
         initializeRooks(color);
@@ -32,6 +39,10 @@ public class Player {
         initializeKing(color);
     }
 
+    /**
+     * Creates all Pawns for player at correct starting positions
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializePawns(Boolean color) {
         int y;
         if (color) {
@@ -44,6 +55,10 @@ public class Player {
         }
     }
 
+    /**
+     * Creates all Rooks for player at correct starting positions
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializeRooks(Boolean color) {
         int y = setY();
         for (int i = 0; i < 8; i = i + 7) {
@@ -51,6 +66,10 @@ public class Player {
         }
     }
 
+    /**
+     * Creates all Bishops for player at correct starting positions
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializeBishops(Boolean color) {
         int y = setY();
         for (int i = 2; i < 6; i = i + 3) {
@@ -58,6 +77,10 @@ public class Player {
         }
     }
 
+    /**
+     * Creates all Knights for player at correct starting positions
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializeKnights(Boolean color) {
         int y = setY();
         for (int i = 1; i < 7; i = i + 5) {
@@ -65,16 +88,28 @@ public class Player {
         }
     }
 
+    /**
+     * Creates Queen for player at correct starting position
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializeQueen(Boolean color) {
         int y = setY();
         pieces.add(new Queen(3, y, color, this));
     }
 
+    /**
+     * Creates King for player at correct starting position
+     * @param color True if player is designated as colored, otherwise false
+     */
     public void initializeKing(Boolean color) {
         int y = setY();
         pieces.add(new King(4, y, color, this));
     }
 
+    /**
+     * Sets Y position of back-row pieces depending on if pieces are colored or not
+     * @return Y position of back-row pieces
+     */
     public int setY() {
         if (color) {
             return 7;
@@ -83,14 +118,26 @@ public class Player {
         }
     }
 
+    /**
+     * Produces list of all GamePieces for Player
+     * @return List of GamePiece
+     */
     public ArrayList<GamePiece> getPieces() {
         return pieces;
     }
 
+    /**
+     * Produce name of Player
+     * @return Name of Player
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Determines if player has colored pieces
+     * @return Produce True if Player's GamePieces are colored, otherwise produce False
+     */
     public Boolean isColored() {
         return this.color;
     }
